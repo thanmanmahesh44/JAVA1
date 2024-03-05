@@ -1,253 +1,187 @@
-1. Develop a JAVA program to add TWO matrices of suitable order N (The value of N should be read from command line arguments).   
+1.a
 
-
-Program:
-
-public class Main {
+public class Program_1a {
     public static void main(String[] args) {
-
-        int a[][]={{1,3,4},{2,4,3},{3,4,5}};
-        int b[][]={{1,3,4},{2,4,3},{1,2,4}};
-
-
-        int c[][]=new int[3][3];
-
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                c[i][j]=a[i][j]+b[i][j];
-                System.out.print(c[i][j]+" ");
-            }
-            System.out.println();
+        if(args.length > 0){
+            String s = args[0];
+            System.out.println("Your message is " + s);
         }
+        else
+            System.out.println("Invalid Argument");
     }
 }
 
 
-Output:
+1.b
 
-
-
-
-
-
-2. .A class called Employee, which models an employee with an ID, name and salary, is   designed as shown in the following class diagram. The method raiseSalary (percent) increases the salary by the given percentage. Develop the Employee class and suitable main method for demonstration.
-
-
-Program:
-
-import java.util.Scanner;
-
-class Employee{
-
-    int id;
-    String name;
-    double salary;
-
-    void increment(double percent){
-        if(percent > 0){
-            double increase = salary * (percent /100);
-            salary += increase;
-        }
-        else {
-            System.out.println("invalid percent or operator");
-        }
-    }
-
-    void Display(Employee employee){
-        System.out.println("Employee ID :"+" "+id);
-        System.out.println("Nmae :"+" "+name);
-        System.out.println("salary"+ " "+salary);
-    }
-
-}
-
-public class Three {
-public static void main(String args[]){
-
-    double p;
-    Employee employee1 = new Employee();
-
-    Scanner sc = new Scanner(System.in);
-
-    System.out.println("Enter id :");
-    employee1.id = sc.nextInt();
-    System.out.println("Enter the name ");
-    employee1.name = sc.next();
-    System.out.println("Enter the salary");
-    employee1.salary = sc.nextDouble();
-
-    System.out.println("Before increment");
-    employee1.Display(employee1);
-
-    System.out.println("Enter the percent to increment");
-    p = sc.nextDouble();
-    employee1.increment(p);
-
-    System.out.println("After increment");
-    employee1.Display(employee1);
-
-}
-}
-
-
-Output:
-
-
-
-
-3. A class called MyPoint, which models a 2D point with x and y coordinates, is designed as follows:
-Two instance variables x (int) and y (int).
-
-A default (or "no-arg") constructor that construct a point at the default location of (0, 0).
-
-A overloaded constructor that constructs a point with the given x and y coordinates.
-
-A method setXY() to set both x and y.
-
-A method getXY() which returns the x and y in a 2-element int array.
-
-A toString() method that returns a string description of the instance in the format "(x, y)".
-
-A method called distance(int x, int y) that returns the distance from this point to another point at the given (x, y) coordinates
-
-An overloaded distance(MyPoint another) that returns the distance from this point to the given MyPoint instance (called another)
-
-Another overloaded distance() method that returns the distance from this point to the origin (0,0)
-
-Develop the code for the class MyPoint. Also develop a JAVA program (calledTestMyPoint) to test all the methods defined in the class
-
-
-Program:
-
-class MyPoint {
-    private int x; 
-    private int y;
-    public MyPoint() {
-        this.x = 0;
-        this.y = 0;
-    }
-
-
-    public MyPoint(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void setXY(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int[ ] getXY() {
-
-        return new int[]{x, y};
-
-    }
-
-    public String toString() {
-        return "(" + x + ", " + y + ")";
-    }
-
-    public double distance(int x, int y) {
-        int xDiff = this.x - x;
-        int yDiff = this.y - y;
-        return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
-    }
-
-    public double distance(MyPoint another) {
-        return distance(another.x, another.y);
-    }
-
-    public double distance() {
-        return distance(0, 0);
-    }
-}
-
-public class TestMyPoint {
-
+public class Program_1b {
     public static void main(String[] args) {
-        MyPoint point1 = new MyPoint();
-        MyPoint point2 = new MyPoint(5, 9);
+        if(args.length != 3){
+			System.out.println("Usage: java CommandLineCalculator <operand1> <operator> <operand2>");
+			System.exit(1);
+		}
+		double operand1 = Double.parseDouble(args[0]);
+		String operator = args[1];
+		double operand2 = Double.parseDouble(args[2]);
+		double result = 0.0;
 
-        point1.setXY(3, 4);
-        System.out.println("Point1 coordinates after setXY: " + point1.getXY()[0] + ", " + point1.getXY()[1]);
-System.out.println("Point2 coordinates: " +point2.toString());
-
-        System.out.println("Distance from Point1 to Point2: " + point1.distance(point2));
-        System.out.println("Distance from Point2 to Origin: " + point2.distance());
-    }}
-
-
-Output:
-
-
-
-
-4. Develop a JAVA program to create a class named shape. Create three sub classes namely: circle, triangle and square, each class has two member functions named draw () and erase (). Demonstrate polymorphism concepts by developing suitable methods, defining member data and main program.
-
-
-Program:
-
-class shape{
-
-    void draw()
-    {
-        System.out.println("Drawing Shape");
-    }
-    void erase()
-    {
-        System.out.println("erasing Shape");
-    }
-
-}
-
-class Circle extends shape{
-    void draw()
-    {
-        System.out.println("Drawing Circle");
-    }
-    void erase()
-    {
-        System.out.println("erasing Circle");
+		switch(operator){
+			case "+":
+			       result = operand1 + operand2;
+			       break;
+			case "-":
+			       result = operand1 - operand2;
+			       break;
+			case "*":
+			       result = operand1 * operand2;
+			       break;
+			case "/":
+				if(operand2 != 0)
+					result = operand1 / operand2;
+				else{
+					System.out.println("Error: Divide by zero error");
+					System.exit(1);
+				}
+				break;
+			default:
+				System.out.println("Error: Invalid operator");
+				System.exit(1);
+		}
+		System.out.println("Result : " + result);
+	}	
     }
 }
 
-class Triangle extends shape{
-    void draw()
-    {
-        System.out.println("Drawing Triangle");
-    }
-    void erase()
-    {
-        System.out.println("erasing Triangle");
-    }
 
+1.c
+
+public class Program_1c {
+    public static void main(String[] args) {
+        int numofargs = args.length;
+		System.out.println("Number of arguments : " + numofargs);
+		System.out.println("Arguments : ");
+		for(int i=0; i<numofargs; i++){
+			System.out.println("Argument " + (i+1) + " : " + args[i]);
+        }
+    }
 }
 
-class Square extends shape{
+ 2. import java.util.*;
 
-    void draw()
-    {
-        System.out.println("Drawing Square");
+public class Program_2 {
+
+    public static int[][] createMatrix(int N) {
+		int[][] matrix = new int[N][N];
+		Random rand = new Random();
+		
+		for(int i=0; i<N; i++){
+			for(int j=0; j<N; j++){
+				matrix[i][j] = rand.nextInt(10);
+			}
+		}
+		return matrix;
+	}
+
+	public static void displayMatrix(int [][] matrix){
+		for(int [] row : matrix){
+			for(int value : row){
+				System.out.print(value + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public static int[][] addMatrices(int[][] matrix1, int[][] matrix2){
+		int N = matrix1.length;
+		int[][] resultMatrix = new int[N][N];
+
+		for(int i=0; i<N; i++){
+			for(int j=0; j<N; j++){
+				resultMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
+			}
+		}
+		return resultMatrix;
+	}
+
+	public static void main(String args[]){
+		if(args.length != 1){
+			System.out.println("Usage: java MatrixAddition_Random <order N>");
+			return ;
+		}
+		
+		int N = Integer.parseInt(args[0]);
+		
+		if(N <= 0){
+			System.out.println("Order N must be a positive integer.");
+			return;
+		}
+
+		int[][] matrix1 = createMatrix(N);
+		int[][] matrix2 = createMatrix(N);
+		
+		System.out.println("Matrix 1:");
+		displayMatrix(matrix1);
+
+		System.out.println("Matrix 2:");
+		displayMatrix(matrix2);
+
+		int[][] resultMatrix = addMatrices(matrix1, matrix2);
+		
+		System.out.println("Resultant Matrix (Sum of matrices):");
+		displayMatrix(resultMatrix);   
     }
-
-    void erase()
-    {
-        System.out.println("erasing Square");
-    }
-
 }
 
-public class Dooc{
+3. 
+class Employee {
+	private int id;
+	private String name;
+	private double salary;
 
-    public static void main(String args[]){
-        shape c =new Circle();
-        shape t =new Triangle();
-        shape s =new Square();
+	public Employee(int id, String name, double salary){
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+	public int getId(){
+		return id;
+	}
+	public String getName(){
+		return name;
+	}
+	public double getSalary(){
+		return salary;
+	}
+	public void setSalary(double salary){
+		if(salary < 0){
+			System.out.println("Invalid Salary");
+		}
+		else{
+			this.salary = salary;
+		}
+	}
+	public void raiseSalary(double percent){
+		if(percent > 0){
+			double raiseAmount = salary*(percent/100);
+			salary += raiseAmount;
+		}
+		else{
+			System.out.println("Invalid percentage. Salary not raised");
+		}
+	}
+	public String toString(){
+		return "Employee[id = "+id+" name = "+name+" salary = "+salary+"]";
+	}
+}
 
-        c.draw();
-        c.erase();
-        t.draw();
-        t.erase();
-        s.draw();
-        s.erase();
+public class Program_3 {
+	public static void main(String args[]) {
+		Employee e1 = new Employee(1, "Suhas", 69000.0);
+		System.out.println("Initial Employee Details : ");
+		System.out.println(e1);
+		e1.raiseSalary(15);
+		System.out.println("Employee Details after salary raise : ");
+		System.out.println(e1);
+	}
+}
+
