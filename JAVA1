@@ -185,3 +185,374 @@ public class Program_3 {
 	}
 }
 
+4.
+class MyPoint {
+	private int x, y;
+
+	public MyPoint() {
+		this.x = 0;
+		this.y = 0;
+	}
+
+	public MyPoint(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setXY(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public int[] getXY() {
+		return new int[]{x, y};
+	}
+
+	public double distance(int x, int y) {
+		int xDiff = this.x - x;
+		int yDiff = this.y - y;
+		return Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+	}
+	
+	public double distance(MyPoint another) {
+		int xDiff = this.x - another.x;
+		int yDiff = this.y - another.y;
+		return Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+	}
+
+	public double distance() {
+		return Math.sqrt(x*x + y*y);
+	}
+
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
+}
+
+public class Program_4 {
+	public static void main(String args[]){
+		MyPoint p1 = new MyPoint();
+		System.out.println(p1);
+
+		p1.setX(8);
+		p1.setY(6);
+		System.out.println("x is: " + p1.getX());
+		System.out.println("y is: " + p1.getY());
+
+		p1.setXY(3, 0);
+		System.out.println("x is: " + p1.getXY()[0]);
+		System.out.println("y is: " + p1.getXY()[1]);
+		System.out.println(p1);
+
+		MyPoint p2 = new MyPoint(0, 4);
+		System.out.println("Distance from p1 to p2: " + p1.distance(p2));
+		System.out.println("Distance from p2 to p1: " + p2.distance(p1));
+		System.out.println("Distance from p1 to (5, 6): " + p1.distance(5, 6));
+		System.out.println("Distance from p1 to origin: " + p1.distance());
+
+		MyPoint points[] = new MyPoint[10];
+		for(int i=0; i<points.length; i++) {
+			points[i] = new MyPoint(i+1, i+1);
+		}
+
+		for(MyPoint point:points) {
+			System.out.println(point);
+		}
+	}
+}
+
+5.
+class Shape {
+	void draw() {
+		System.out.println("Drawing a shape");
+	}
+	 void erase() {
+		System.out.println("Erasing a shape");
+	}
+}
+
+class Circle extends Shape {
+	void draw() {
+		System.out.println("Drawing a circle");
+	}
+	void erase() {
+		System.out.println("Erasing a circle");
+	}
+}
+
+class Triangle extends Shape {
+	void draw() {
+		System.out.println("Drawing a triangle");
+	}
+	void erase() {
+		System.out.println("Erasing a triangle");
+	}
+}
+
+class Square extends Shape {
+	void draw() {
+		System.out.println("Drawing a square");
+	}
+	void erase() {
+		System.out.println("Erasing a square");
+	}
+}
+
+public class Program_5 {
+	public static void main(String args[]) {
+		Shape circle = new Circle();
+		Shape triangle = new Triangle();
+		Shape square = new Square();
+
+		circle.draw();
+		circle.erase();
+		triangle.draw();
+		triangle.erase();
+		square.draw();
+		square.erase();
+	}
+}
+
+6.
+interface Resizable {
+	void resizeWidth(int width);
+	void resizeHeight(int height);
+}
+class Rectangle implements Resizable {
+	private int width;
+	private int height;
+
+	public Rectangle(int width, int height) {
+		this.width = width;
+		this.height = height;
+	}
+	public void resizeWidth(int width) {
+		if(width > 0) {
+			this.width = width;
+			System.out.println("Width resized to : " + width);
+		} else {
+			System.out.println("Invalid width. Width must be greater than 0");
+		}
+	}
+	public void resizeHeight(int height) {
+		if(height > 0) {
+			this.height = height;
+			System.out.println("Height resized to : " + height);
+		} else {
+			System.out.println("Invalid height. Height must be greater than 0");
+		}
+	}
+	public void display() {
+		System.out.println("Rectangle : Width = " + width + " Height = " + height);
+	}
+}
+
+public class Program_6 {
+	public static void main(String args[]) {
+		Rectangle rectangle = new Rectangle(10, 5);
+		System.out.println("Original Dimensions : ");
+		rectangle.display();
+		rectangle.resizeWidth(15);
+		rectangle.resizeHeight(8);
+		System.out.println("Resized dimension : ");
+		rectangle.display();
+	}
+}
+
+7.
+class DivisionByZeroException extends Exception {
+	public DivisionByZeroException(String message) {
+		super(message);
+	}
+}
+
+class Calculator {
+	public static double divide(int num, int den) throws DivisionByZeroException {
+		if(den == 0) {
+			throw new DivisionByZeroException("Division by zero is not allowed");
+		}
+		return (double)num/den;
+	}
+}
+
+public class Program_7 {
+	public static void main(String args[]) {
+		int num = 10;
+		int den = 0;
+
+		try {
+			double result = Calculator.divide(num, den);
+			System.out.println("Result of division : " + result);
+		} catch(DivisionByZeroException e) {
+			System.err.println("Error : " + e.getMessage());
+		} finally {
+			System.out.println("This block is always excecuted");
+		}
+	}
+}
+
+8.
+//Create a folder named mypack and a file named MyClass.java
+package mypack;
+
+public class MyClass {
+    public void greet() {
+        System.out.println("Hello from MyClass in mypack package!");
+    }
+}
+
+//Create a file outside mypack
+import mypack.MyClass;
+
+public class Program_8 {
+
+    public static void main(String[] args) {
+        MyClass obj = new MyClass();
+        obj.greet();
+    }
+}
+
+9.
+class MyRunnable implements Runnable {
+	public void run() {
+		try {
+			System.out.println(Thread.currentThread().getName() + " is running");
+			Thread.sleep(500);
+			System.out.println(Thread.currentThread().getName() + " has finished");
+		}
+		catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}
+public class Program_9 {
+	public static void main(String args[]) {
+		MyRunnable myRunnable1 = new MyRunnable();
+		MyRunnable myRunnable2 = new MyRunnable();
+		
+		Thread thread1 = new Thread(myRunnable1, "Thread-1");
+		Thread thread2 = new Thread(myRunnable2, "Thread-2");
+
+		thread1.start();
+		thread2.start();
+	}
+}
+
+10.
+class MyThread extends Thread {
+	public MyThread(String threadName) {
+		super(threadName);
+		start();
+	}
+	public void run() {
+		for(int i=1; i<=5; i++) {
+			System.out.println(Thread.currentThread().getName() + " - Count : " + i);
+			try {
+				Thread.sleep(500);
+			} catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+public class Program_10 {
+	public static void main(String args[]) {
+		MyThread myThread = new MyThread("Child Thread");
+		for(int i=1; i<=5; i++) {
+			System.out.println(Thread.currentThread().getName() + " - Count : " + i);
+			try {
+				Thread.sleep(500);
+			} catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+11.
+class Rectangle {
+	int length;
+	int breadth;
+
+	Rectangle() {
+		this.length = 10;
+		this.breadth = 5;
+	}
+
+	Rectangle(int length, int breadth) {
+		this.length = length;
+		this.breadth = breadth;
+	}
+
+	int calculateArea() {
+		return length*breadth;
+	}
+}
+public class Program_11 {
+	public static void main(String args[]) {
+		Rectangle r1 = new Rectangle();
+
+		int area1 = r1.calculateArea();
+		System.out.println("Area of rectangle 1 : " + area1);
+
+		Rectangle r2 = new Rectangle(20, 30);
+
+		int area2 = r2.calculateArea();
+		System.out.println("Area of rectangle 2 : " + area2);
+	}
+}
+
+12.
+class Bank {
+	public double getRateOfInterest() {
+		return 0.0;
+	}
+}
+
+class SBIBank extends Bank {
+	public double getRateOfInterest() {
+		return 8.0;
+	}
+}
+
+class ICICIBank extends Bank {
+	public double getRateOfInterest() {
+		return 7.0;
+	}
+}
+
+class AXISBank extends Bank {
+	public double getRateOfInterest() {
+		return 9.0;
+	}
+}
+
+public class Program_12 {
+	public static void main(String args[]) {
+		Bank sbiBank = new SBIBank();
+		Bank iciciBank = new ICICIBank();
+		Bank axisBank = new AXISBank();
+
+		System.out.println("SBI Bank Interest Rate : " + sbiBank.getRateOfInterest() + "%");
+		System.out.println("ICICI Bank Interest Rate : " + iciciBank.getRateOfInterest() + "%");
+		System.out.println("AXIS Bank Interest Rate : " + axisBank.getRateOfInterest() + "%");
+	}
+}
+
